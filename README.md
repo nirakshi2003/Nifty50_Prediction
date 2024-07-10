@@ -1,28 +1,51 @@
- # Nifty50-Prediction
+ # Where's Nifty ?
 
-Nifty Stock Price Prediction:
-This project demonstrates a method for predicting  the high and low prices of Nifty stocks using a Stacked LSTM neural network. The model is trained on historical stock data to predict future prices. 
+## **Introduction :**
 
-Table of Contents
-Introduction
-Data
-Preprocessing
-Model
-Training
-Evaluation
-Usage
-Requirements
+In this project, we will be predicting the high and low prices of Nifty50 index using a Stacked LSTM neural network. The model is trained on historical stock data to predict future prices. The LSTM model is chosen for its ability to handle time series data and capture temporal dependencies.
 
-Introduction
-This project aims to predict the high and low prices of Nifty stocks using Stacked LSTM neural network. The LSTM model is chosen for its ability to handle time series data and capture temporal dependencies.
+## **Reading the libraries:**
 
-Data
-The dataset is used in this project contains historical Nifty stock prices which is taken from the NSE official website. It includes various columns such as High, Low, Open, Close, and Volume.
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/46ab76ca-c6e7-4cc4-b7b7-846dc4b24375)
 
-Preprocessing
+Pandas is a library that is used for data analysis. It also acts as a wrapper over Matplotlib and NumPy libraries. For instance, .plot() from Pandas performs a similar operation to Matplotlib plot operations.
+
+NumPy is used for performing a wide variety of mathematical operations for arrays and matrices. In addition to this, the steps taken for computation from the NumPy library are effective and time-efficient.
+
+Matplotlib is a low level graph plotting library in python that serves as a visualization utility. It creates publication quality plots and makes interactive figures that can zoom, pan, update.
+
+## **Dataset:**
+
+The dataset is used in this project contains historical Nifty stock prices. It includes various columns such as High, Low, Open, Close, Date, Shares Traded and Turnover.
+
+#### Note: The data was taken from 
+https://www.nseindia.com/reports-indices-historical-index-data
+
+## **Data Preprocessing:**
+
 Loading Data: The data is loaded using pandas.
-Checking for Missing Values: Missing values and duplicate rows are checked and handled.
+
+Checking for Missing Values: There are no missing values and duplicate rows in our dataset. So there is no room for that error rectification.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/5a99072d-1ca5-4a8d-93aa-fc40080934aa)
+
 Scaling Data: The High and Low columns are normalized using MinMaxScaler to bring values within the range of 0 to 1.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/1e50c00c-d22a-4a44-b57b-8ecd98f8a67d)
+
+
+## **Data Exploration and Visualization:**  
+
+We will visualize the High column (in y-axis) of the dataset by plotting it against days (in x-axis).
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/6ade5d7b-0d35-4c07-af7f-6ddfc409e829)
+
+Next up is the visualization of the Low column.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/3c332c91-283f-4dc2-93c9-64e1cfb456f6)
+
+
+
 python
 from sklearn.preprocessing import MinMaxScaler
 
