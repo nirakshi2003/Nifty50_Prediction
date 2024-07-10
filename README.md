@@ -2,7 +2,13 @@
 
 ## **Introduction :**
 
-In this project, we will be predicting the high and low prices of Nifty50 index using a Stacked LSTM neural network. The model is trained on historical stock data to predict future prices. The LSTM model is chosen for its ability to handle time series data and capture temporal dependencies.
+In this project, we will be predicting the high and low prices of Nifty50 index using a Stacked LSTM neural network. 
+
+The NIFTY 50 is a benchmark Indian stock market index that represents the weighted average of 50 of the largest Indian companies listed on the National Stock Exchange.
+<br>**High** is the highest price at which the scrip has traded during a trade session.
+<br>**Low** is the lowest price at which the scrip has traded during a trade session.
+
+The model is trained on historical price data to predict future prices. The LSTM model is chosen for its ability to handle time series data and capture temporal dependencies.
 
 ## **Reading the libraries:**
 
@@ -23,13 +29,13 @@ https://www.nseindia.com/reports-indices-historical-index-data
 
 ## **Data Preprocessing:**
 
-Loading Data: The data is loaded using pandas.
+**Loading Data:** The data is loaded using pandas.
 
-Checking for Missing Values: There are no missing values and duplicate rows in our dataset. So there is no room for that error rectification.
+**Checking for Missing Values:** There are no missing values and duplicate rows in our dataset. So there is no room for that error rectification.
 
 ![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/5a99072d-1ca5-4a8d-93aa-fc40080934aa)
 
-Scaling Data: The High and Low columns are normalized using MinMaxScaler to bring values within the range of 0 to 1.
+**Scaling Data:** The High and Low columns are normalized using MinMaxScaler to bring values within the range of 0 to 1.
 
 ![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/1e50c00c-d22a-4a44-b57b-8ecd98f8a67d)
 
@@ -44,38 +50,58 @@ Next up is the visualization of the Low column.
 
 ![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/3c332c91-283f-4dc2-93c9-64e1cfb456f6)
 
+## **Prediction of the High Price :**
+
+### **Splitting data set into Training Data and Test Data:**
+
+It is important to divide the data into training and test set. The training set is used to train the machine learning models under consideration. After successfully training the models, we take a look at their performance over the test set where the output is already known. After the machine learning models predict the outcome for the test set, we take those values and compare them with the known test outputs to evaluate the performance of our model.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/b2e06e62-915b-49b9-8530-c6f1f599dcf3)
+
+70% of the dataset is now the training set and remaining 30% is the test set.
+
+### **Creating smaller datasets:**
+
+We will now convert our dataset into dependent and independent feature based on the timesteps (i.e., 100 over here).
+
+Suppose we have **training set values** as - 120,130,125,140,134,150 and **test set values** as - 160,190,154,166.
+<br> timesteps=3
+
+then, 
+<br>f1 = 120, f2 = 130, f3 = 125, o/p = 140 (in 1st round)
+<br>f1 = 130, f2 = 125, f3 = 140, o/p = 134 (in 2nd round)
+<br>f1 = 125, f2 = 140, f3 = 134, o/p = 150 (in 3rd round)
+
+the f1, f2 and f3 belong to X_train and o/p belongs to X_test.
+
+Same happens with the test set.
+ 
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/6f48d29d-b0eb-4d3b-af5d-ca8921996c0b)
+
+Next we will convert the shape of X-train and X_test to 3 dimensions so that we can give it as an input to our LSTM model.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/8898d295-b12a-4337-acd9-b08c4fef5652)
 
 
-python
-from sklearn.preprocessing import MinMaxScaler
+### **Model Building:**
 
-scaler = MinMaxScaler(feature_range=(0, 1))
+An LSTM model is constructed using Keras. The model consists of 3 LSTM layers with dropout to prevent overfitting and 2 dense layers for the output.
 
-# Scale High values
-high_values = ds0["High"].values.reshape(-1, 1)
-ds0["High"] = scaler.fit_transform(high_values)
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/35d6cd51-262a-44c4-a683-5b7258bbf216)
 
-# Scale Low values
-low_values = ds0["Low"].values.reshape(-1, 1)
-ds0["Low"] = scaler.fit_transform(low_values)
+Now we fill fit X_train and Y-train in our model
 
-Model
-An LSTM model is constructed using Keras. The model consists of three LSTM layers with dropout to prevent overfitting and two dense layers for the output.
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/1f9b5a99-b38b-4a20-84ac-7bc5d623b4f0)
 
-python
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
+Epoch refers to the one entire passing of training data through the algorithm. The training data is broken down into small batches to overcome the issue of storage space limitations of a computer system. These smaller batches can be easily fed into the machine learning model to train it. 
 
-model = Sequential()
-model.add(LSTM(32, return_sequences=True, input_shape=(100, 1)))
-model.add(Dropout(0.2))
-model.add(LSTM(32, return_sequences=True))
-model.add(Dropout(0.2))
-model.add(LSTM(32))
-model.add(Dropout(0.2))
-model.add(Dense(16))
-model.add(Dense(1))
-model.compile(loss='mean_squared_error', optimizer='adam')
+Next up is the model prediction.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/482a533b-656a-49ce-ac2c-4ca0c3326f13)
+
+### **Model Evaluation:**
+
+
 
 Training
 The data is split into training and testing sets with a 70-30 ratio. The model is trained for 100 epochs with a batch size of 24.
