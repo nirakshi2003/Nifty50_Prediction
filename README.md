@@ -101,47 +101,24 @@ Next up is the model prediction.
 
 ### **Model Evaluation:**
 
+We will first inverse the normalization of the predicted values train and test data and then plot the graph to evaluate its performance.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/41240709-ae95-45bb-8212-a9f4a4363cad)
+
+The blue color output is the complete dataset. The orange color output is the training data prediction and the green color is the test data prediction.
+<br> Our stacked LSTM model has performed quite well as the predicted plots are very close to the original ones.
+
+### **Predicting the next 7 days Nifty50 index High Price:**
+
+We will take last 100 days data of High column and reshape it into (1,-1) and store it in a list.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/0407a819-c399-4c1c-b03c-651ccdb1d2ff)
 
 
-Training
-The data is split into training and testing sets with a 70-30 ratio. The model is trained for 100 epochs with a batch size of 24.
+Then we are passing the list to our stcked LSTM model and predicting. The predicted value is stored in the yhat variable and adding that yhat variable inside the final output and also adding it to the previous input, i.e. the temp_input.
 
-python
-model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=100, batch_size=24, verbose=1)
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/57d91302-b4a0-4808-900b-4c7ae8f43a72)
 
-Evaluation
-The model's performance is evaluated using Mean Squared Error (MSE). The predictions are plotted against the actual values to visualize the accuracy.
+Finally we plot the predicted 7 days values in a graph.
 
-python
-from sklearn.metrics import mean_squared_error
-import math
-
-train_predict = scaler.inverse_transform(model.predict(X_train))
-test_predict = scaler.inverse_transform(model.predict(X_test))
-
-train_score = math.sqrt(mean_squared_error(Y_train, train_predict))
-test_score = math.sqrt(mean_squared_error(Y_test, test_predict))
-
-print(f'Train Score: {train_score} RMSE')
-print(f'Test Score: {test_score} RMSE')
-
-Usage
-To use this project, follow these steps:
-
-Clone the repository.
-Install the required dependencies.
-Run the Jupyter notebook or script.
-
-Requirements
-Python 3.x
-pandas
-numpy
-matplotlib
-scikit-learn
-keras
-tensorflow
-Install the required packages using:
-
-bash
-Copy code
-pip install pandas numpy matplotlib scikit-learn keras tensorflow
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/71c97e15-2d66-4f89-ba28-3d489e53bf62)
