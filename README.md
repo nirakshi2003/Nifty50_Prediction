@@ -122,3 +122,40 @@ Then we are passing the list to our stcked LSTM model and predicting. The predic
 Finally we plot the predicted 7 days values in a graph.
 
 ![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/71c97e15-2d66-4f89-ba28-3d489e53bf62)
+
+Our next 7 days prediction is:
+<br>Day 1 - 22713.92924082
+    <br>Day 2 - 22710.17390293
+       <br>Day 3 - 22687.02057463
+       <br>Day 4 - 22656.65483176
+       <br>Day 5 - 22626.06883446
+       <br>Day 6 - 22598.36908781
+       <br>Day 7 - 22574.39622951
+
+## **Prediction of the Low Price :**
+
+The low index price of Nifty50 is calculated in the same manner as high.
+<br>Just a small change is needed.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/187a9620-ee23-47d2-87ed-8608ce0b231a)
+
+Below is the performance of our stacked LSTM on low data.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/80d5a4b6-c3d9-45b5-8190-11967b49c299)
+
+Next is the prediction graph.
+
+![image](https://github.com/nirakshi2003/Nifty50_Prediction/assets/96014974/fa354f70-dab7-4382-9ee5-76dc50c75b97)
+
+Our next 7 days prediction is:
+<br>Day 1 - 22508.54107529
+       <br> Day 2 - 22464.60766007
+       <br> Day 3 - 22385.70151366
+       <br> Day 4 - 22297.22164174
+       <br> Day 5 - 22213.46989807
+       <br> Day 6 - 22139.79846507
+       <br> Day 7 - 22076.71209247
+
+
+
+
