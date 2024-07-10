@@ -1,4 +1,4 @@
-# Nifty50-Prediction
+ # Nifty50-Prediction
 
 Nifty Stock Price Prediction:
 This project demonstrates a method for predicting  the high and low prices of Nifty stocks using a Stacked LSTM neural network. The model is trained on historical stock data to predict future prices. 
